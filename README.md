@@ -5,4 +5,4 @@ Algorithms and Data Structures in Javascript and C++. See the project in action 
 
 http://forth-media.com/code/
 
-This repo contains the Angular JS website framework. Find Angular JavaScript in the JS folder. Find HTML (templateUrl) in the CODE/VIEWS folder.
+This repo contains the Angular (1) JS website framework. Find Angular JavaScript in the JS folder. Find HTML (templateUrl) in the CODE/VIEWS folder.
