@@ -1,0 +1,49 @@
+//  Kurt Jonach
+//  Classes and ES6
+
+class Vehicle {
+    constructor(data) {
+        this.year = data.year;
+        this.make = data.make;
+        this.model = data.model;
+    }
+    
+    printInfo() {
+        return `${this.year} ${this.make} ${this.model}`;
+    }
+}
+
+// extends keyword creates a child class
+class Car extends Vehicle {
+    constructor(data) {
+        super(data);
+        this.isEV = data.isEV;
+    }
+    
+    printInfo() {
+        return `${super.printInfo()} EV? ${this.isEV}`;
+    }
+}
+
+// try it out
+var tesla = new Car({
+    year: 2016,
+    make: 'Tesla',
+    model: 'Model S',
+    isEV: true
+});
+
+var ford = new Car({
+    year: 1965,
+    make: 'Ford',
+    model: 'Mustang',
+    isEV: false    
+});
+
+var output = document.getElementById('output');
+var div1 = document.createElement('div');
+div1.innerHTML = tesla.printInfo();
+var div2 = document.createElement('div');
+div2.innerHTML = ford.printInfo();
+output.appendChild(div1);
+output.appendChild(div2);

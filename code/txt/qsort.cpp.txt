@@ -1,0 +1,56 @@
+//  Kurt Jonach
+//  Quicksort
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// helper: swap two elements, in place
+void swap(vector<int>& v, int a, int b) {
+    int t = v[a];
+    v[a] = v[b];
+    v[b] = t;
+}
+
+// helper: sort elements < R to the left, return pivot
+int pivot(vector<int>& v, int p, int r) {
+    int q = p;
+    for(int j = p; j < r; ++j) {
+        if (v[j] <= v[r]) {
+            swap(v, j, q);
+            ++q;
+        }
+    }
+    swap(v, r, q);
+    return q;
+}
+
+// split array at pivot and call recursively
+void quick_sort(vector<int>& v, int p, int r) {
+    if (p < r) {
+        int q = pivot(v, p, r);
+        quick_sort(v, p, q-1);
+        quick_sort(v, q+1, r);
+    }
+}
+
+void print(const vector<int>& v) {
+    cout<<"values: [";
+    for (int i=0; i<v.size(); ++i) {
+        cout<<v[i];
+        if (i<v.size()-1) cout<<", ";
+    }
+    cout<<"]\n";
+}
+
+int main() {
+    vector<int> values;
+    int v;
+    cout<<"Enter 10 integer values to sort:\n";
+    for (int i=0; i!=10; ++i) {
+        cin>>v;
+        values.push_back(v);
+    }
+    quick_sort(values, 0, values.size()-1);
+    print(values);
+}

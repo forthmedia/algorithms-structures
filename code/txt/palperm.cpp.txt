@@ -1,0 +1,55 @@
+//  Kurt Jonach
+//  Palindrome Permutation: Given a string, write a function to check
+//  if it is a permumation of a palindrome.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int size = 26;
+
+// helper: returns index into lookup table, discards punctuation
+int char_index(char& c) {
+    if (! isalpha(c)) return -1;
+    c = tolower(c);
+    return (int) c - 'a';
+}
+
+// helper: checks for one or less odd numbers in set
+bool only_one_odd(int a[]) {
+    bool found_odd = false;
+    for (int i=0; i<size; i++) {
+        if ((a[i] % 2) == 1) {
+            if (found_odd) {
+                return false;
+            }
+            found_odd = true;
+        }
+    }
+    return true;
+}
+
+// ASCII character set upper or lower case, ignores punctuation
+bool palperm(string s) {
+    int set[size] = {}; // init lookup table
+    int value;
+    
+    for (int i=0; i<s.length(); i++) {
+        value = char_index(s[i]);
+        if (value > 0) {
+            set[value]++;
+        }
+    }
+    return only_one_odd(set);
+}
+
+int main() {
+    string s = "I'm Adam, Madam";
+    string t = "foolish";
+    
+    bool result = palperm(s);
+    cout<<s<<" result="<<result<<endl;
+    
+    result = palperm(t);
+    cout<<t<<" result="<<result<<endl;
+}

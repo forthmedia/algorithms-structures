@@ -1,1 +1,56 @@
+//  Kurt Jonach
+//  Classes
 
+//  Note that interface, implementation and main are usually
+//  separate files.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+////////// INTERFACE //////////
+
+// protected members are accessible by derived class Car
+
+class Vehicle {
+public:
+    Vehicle(int year, string make, string model)
+        : year(year), make(make), model(model) {}
+  
+    virtual void print_info() = 0;
+    
+protected:
+    int year;
+    string make;
+    string model;
+};
+
+class Car : public Vehicle {
+public:
+    Car(int year, string make, string model, bool is_ev)
+        : Vehicle(year, make, model), is_ev(is_ev) {}
+    
+    void print_info() override;
+    
+private:
+    bool is_ev;
+};
+
+////////// CAR IMPLEMENTATION //////////
+
+// Car must override pure virutual function in base class Vehicle
+
+void Car::print_info()
+{
+    cout<<year<<" "<<make<<" "<<model<<
+        " EV? "<<(is_ev ? "true" : "false")<<endl;
+}
+
+////////// MAIN //////////
+
+int main() {
+    Car tesla = Car(2016, "Tesla", "Model S", true);
+    tesla.print_info();
+    Car ford = Car(1965, "Ford", "Mustang", false);
+    ford.print_info();
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+//helper: cross off all multiples of value prime in table
+void cross_off_multiples(vector<bool>&table, int prime) {
+    for (int i = prime*prime; i < table.size(); i += prime)
+        table[i] = false;
+}
+
+//helper: find the next value in table which is true
+int get_next_value(vector<bool>table, int prime) {
+    int next = prime + 1;
+    while (next < table.size() && table[next] == false)
+        next++;
+    return next;
+}
+
+//iteratively cross off all multiples of prime, starting with 2
+void sieve_eratosthenes(vector<bool>&table, int max) {
+    int prime = 2;
+    while (prime <= sqrt(max)) {
+        cross_off_multiples(table, prime);
+        prime = get_next_value(table, prime);
+    }
+}
+
+void print_primes(vector<bool>table, int max) {
+    int count = 2;
+    cout<<"Prime values up to "<<max<<endl;
+    for(int i = 2; i <= table.size(); i++, count++) {
+        if (table[i] == true) cout<<" "<<count;
+    }
+    cout<<endl;
+}
+
+int main() {
+    int max = 1024;
+    vector<bool> table(max, true);
+    sieve_eratosthenes(table, max);
+    print_primes(table, max);
+}

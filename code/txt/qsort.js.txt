@@ -1,0 +1,31 @@
+//  Kurt Jonach
+//  Quicksort
+
+// helper: swap two elements, in place
+var swap = function(array, a, b) {
+    var t = array[a];
+    array[a] = array[b];
+    array[b] = t;
+}
+
+// helper: sort elements < R to the left, return pivot
+var pivot = function(array, p, r) {
+    var q = p;
+    for (var j = p; j < r; j++) {
+        if (array[j] <= array[r]) {
+            swap(array, j, q);
+            q++;
+        }
+    }
+    swap(array, r, q);
+    return q;
+}
+
+// split array at pivot and call recursively
+var quickSort = function(array, p, r) {
+    if (p < r) {
+        var q = pivot(array, p, r);
+        quickSort(array, p, q-1);
+        quickSort(array, q+1, r);
+    }
+};
