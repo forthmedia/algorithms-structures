@@ -25,6 +25,8 @@
     <script src="../angular/angular-ui-router.min.js"></script>
     <script src="../angular/ui-bootstrap-tpls.min.js"></script>
     <script src="../js/codeapp.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/sieve.js"></script>
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -50,7 +52,9 @@
       <code-navbar></code-navbar>
     </header>
     
-    <section ui-view></section>
+    <section ng-controller="sieveController">
+      <code-sieve></code-sieve>
+    </section>
 
     <script src="../jquery/jquery.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
